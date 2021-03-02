@@ -18,8 +18,11 @@ public class StdBufferedReader implements Closeable {
 
     private static final int DEFAULT_CHAR_BUFFER_SIZE = 8192;
     private final char[] charBuffer;
-    private int returnCharsByReader = 0; // amount data return by reader
-    private int realBufferLength = 0; // for saving new size of buffer during after shifting it
+    private int returnCharsByReader = 0;
+    /**
+     * field for saving new size of buffer during analyze it
+     */
+    private int realBufferLength = 0;
     private int requestedSize = -1;
 
     /**
@@ -64,7 +67,7 @@ public class StdBufferedReader implements Closeable {
      * @throws IOException if any I/O error occurs
      */
     public char[] readLine() throws IOException {
-        char[] charLine = new char[0]; // array for accumulated result
+        char[] charLine = new char[0];
         while (hasNext()) {
             int offsetLineFeed = findLineInBuffer(charBuffer, this.returnCharsByReader);
             charLine = buildLine(charLine, offsetLineFeed);
