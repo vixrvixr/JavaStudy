@@ -23,8 +23,8 @@ public class SelectRequest extends AbstractRequest<String[][]> {
         Integer indexSelector = null;
         List<String> columnsAsList = Arrays.asList(columns);
         if (selector != null) {
-            for (int i = 0; i < cvs.header().length; i++) {
-                if(cvs.header()[i].equals(selector.fieldName())){
+            for (int i = 0; i < csv.header().length; i++) {
+                if(csv.header()[i].equals(selector.fieldName())){
                     indexSelector = i;
                     break;
                 }
@@ -33,14 +33,14 @@ public class SelectRequest extends AbstractRequest<String[][]> {
 
         List<Integer> ordinal = new ArrayList<>();
 
-        for (int i = 0; i < cvs.header().length; i++) {
-            if (columnsAsList.contains(cvs.header()[i])) {
+        for (int i = 0; i < csv.header().length; i++) {
+            if (columnsAsList.contains(csv.header()[i])) {
                 ordinal.add(i);
             }
         }
 
         List<String[]> newValue = new ArrayList<>();
-        String[][] values = cvs.values();
+        String[][] values = csv.values();
         for (String[] line : values) {
             if (indexSelector == null || line[indexSelector].equals(selector.value())) {
                 List<String> newLine = new ArrayList<>();

@@ -22,30 +22,30 @@ public class UpdateRequest extends AbstractRequest<CSV> {
         // find index of whereSelector.fieldName()
         int indexOfFieldWhere = 0;
 
-        for (int i = 0; i < cvs.header().length; i++) {
-            if (cvs.header()[i].equalsIgnoreCase(whereSelector.fieldName())) {
+        for (int i = 0; i < csv.header().length; i++) {
+            if (csv.header()[i].equalsIgnoreCase(whereSelector.fieldName())) {
                 indexOfFieldWhere = i;
                 break;
             }
         }
 
         int indexOfFieldUpdate = 0;
-        for (int i = 0; i < cvs.header().length; i++) {
-            if (cvs.header()[i].equalsIgnoreCase(updateToSelector.fieldName())) {
+        for (int i = 0; i < csv.header().length; i++) {
+            if (csv.header()[i].equalsIgnoreCase(updateToSelector.fieldName())) {
                 indexOfFieldUpdate = i;
                 break;
             }
         }
 
         List<String[]> newValue = new ArrayList<>();
-        for (String[] line : cvs.values()) {
+        for (String[] line : csv.values()) {
             if (line[indexOfFieldWhere].equalsIgnoreCase(whereSelector.value())) {
                 line[indexOfFieldUpdate] = updateToSelector.value();
             }
             newValue.add(line);
         }
 
-        return new CSV(cvs.header(), newValue.toArray(new String[0][0]));
+        return new CSV(csv.header(), newValue.toArray(new String[0][0]));
     }
 
     public static class Builder {

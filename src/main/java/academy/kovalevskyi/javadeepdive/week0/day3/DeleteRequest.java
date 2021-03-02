@@ -17,28 +17,28 @@ public class DeleteRequest extends AbstractRequest<CSV> {
     public CSV execute() throws RequestException {
         // find index of whereSelector.fieldName()
         int indexOfField = 0;
-        for (int i = 0; i < cvs.header().length; i++) {
-            if (cvs.header()[i].equals(whereSelector.fieldName())) {
+        for (int i = 0; i < csv.header().length; i++) {
+            if (csv.header()[i].equals(whereSelector.fieldName())) {
                 indexOfField = i;
                 break;
             }
         }
         ArrayList<Integer> listIndexesForDelete = new ArrayList<>();
-        for (int i = 0; i < cvs.values().length; i++) {
-            if (cvs.values()[i][indexOfField].equals(whereSelector.value())) {
+        for (int i = 0; i < csv.values().length; i++) {
+            if (csv.values()[i][indexOfField].equals(whereSelector.value())) {
                 listIndexesForDelete.add(i);
             }
         }
         int index = 0;
-        int newLength = cvs.values().length - listIndexesForDelete.size();
-        String[][] valuesResult = new String[newLength][cvs.values()[0].length];
-        for (int i = 0; i < cvs.values().length; i++) {
+        int newLength = csv.values().length - listIndexesForDelete.size();
+        String[][] valuesResult = new String[newLength][csv.values()[0].length];
+        for (int i = 0; i < csv.values().length; i++) {
             if (!listIndexesForDelete.contains(i)) {
-                System.arraycopy(cvs.values()[i], 0, valuesResult[index], 0, cvs.values()[i].length);
+                System.arraycopy(csv.values()[i], 0, valuesResult[index], 0, csv.values()[i].length);
                 index++;
             }
         }
-        return new CSV(cvs.header(), valuesResult);
+        return new CSV(csv.header(), valuesResult);
     }
 
     public static class Builder {

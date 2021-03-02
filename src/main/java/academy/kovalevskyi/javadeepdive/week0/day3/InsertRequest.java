@@ -13,16 +13,16 @@ public class InsertRequest extends AbstractRequest<CSV> {
 
     @Override
     public CSV execute() throws RequestException {
-        if (cvs.values().length == 0) {
+        if (csv.values().length == 0) {
             String[][] val = new String[][]{{line[0],line[1],line[2],line[3]}};
-            return new CSV(cvs.header(), val);
+            return new CSV(csv.header(), val);
         } else {
-            String[][] newValues = new String[cvs.values().length + 1][cvs.header().length];
-            copyValues(cvs.values(), newValues);
-            final int lastValue = cvs.values().length;
-            System.arraycopy(line, 0, newValues[cvs.values().length], 0, lastValue);
+            String[][] newValues = new String[csv.values().length + 1][csv.header().length];
+            copyValues(csv.values(), newValues);
+            final int lastValue = csv.values().length;
+            System.arraycopy(line, 0, newValues[csv.values().length], 0, lastValue);
 
-            return new CSV(cvs.header(), newValues);
+            return new CSV(csv.header(), newValues);
         }
     }
 

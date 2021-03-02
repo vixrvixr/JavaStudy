@@ -2,10 +2,10 @@ package academy.kovalevskyi.javadeepdive.week0.day3;
 import academy.kovalevskyi.javadeepdive.week0.day2.CSV;
 
 public abstract class AbstractRequest<T> {
-    protected CSV cvs;
+    protected CSV csv;
 
     protected AbstractRequest(CSV target) {
-        this.cvs = target;
+        this.csv = target;
     }
 
     protected abstract T execute() throws RequestException;

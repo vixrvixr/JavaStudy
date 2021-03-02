@@ -22,17 +22,17 @@ public class JoinRequest extends AbstractRequest<CSV> {
     @Override
     protected CSV execute() throws RequestException {
 
-        int newLength = from.header().length + cvs.header().length - 1;
+        int newLength = from.header().length + csv.header().length - 1;
 
         indexOfFieldFrom = findIndexField(from.header());
-        indexOfFieldOn =findIndexField(cvs.header());
+        indexOfFieldOn =findIndexField(csv.header());
 
         String[][] copyValue = from.values();
 
         String[][] newValue = new String[copyValue.length][newLength];
 
-        for (int i = 0; i < cvs.values().length; i++) {
-            String[] copyLine = cvs.values()[i];
+        for (int i = 0; i < csv.values().length; i++) {
+            String[] copyLine = csv.values()[i];
             String valueFind = copyLine[indexOfFieldOn];
             String[] findedLine = new String[0];
             for (String[] line : copyValue) {
@@ -43,7 +43,7 @@ public class JoinRequest extends AbstractRequest<CSV> {
             }
             newValue[i] = copyLine(copyLine, findedLine, valueFind);
         }
-        String[] newHeader = copyLine(cvs.header(), from.header(), by);
+        String[] newHeader = copyLine(csv.header(), from.header(), by);
 
         return new CSV(newHeader, newValue);
     }
@@ -95,7 +95,7 @@ public class JoinRequest extends AbstractRequest<CSV> {
             }
         }
 
-        for (int j = 0; j < cvs.header().length; j++) {
+        for (int j = 0; j < csv.header().length; j++) {
             if (j != indexOfFieldOn) {
                 buffer.add(on[j]);
             }
